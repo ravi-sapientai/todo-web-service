@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import java.net.URI;
 import java.util.List;
@@ -44,6 +45,17 @@ public class ToDoController {
 
     @PostMapping("/todos")
     public ResponseEntity<Object> createItem(@RequestBody ToDoItem toDoItem) {
+        ToDoItem savedToDoItem = toDoRepository.save(toDoItem);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(savedToDoItem.getId()).toUri();
+        return ResponseEntity.created(location).body(savedToDoItem);
+    }
+
+    @PostMapping("/todos/polymorphic")
+    public ResponseEntity<Object> createPolymorphicItem(@RequestBody @JsonTypeInfo(
+            use = JsonTypeInfo.Id.NAME,
+            include = JsonTypeInfo.As.PROPERTY,
+            property = "type") ToDoItem toDoItem) {
         ToDoItem savedToDoItem = toDoRepository.save(toDoItem);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(savedToDoItem.getId()).toUri();
