@@ -5,7 +5,7 @@ import jakarta.persistence.DiscriminatorValue;
 
 @Entity
 @DiscriminatorValue("personal")
-public class PersonalToDoItem extends ToDoItem {
+public class PersonalToDoItem extends BaseTodoItem {
     private String location;
     private String category;
 

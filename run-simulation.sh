@@ -1,7 +1,7 @@
 export LE_SERVICE_URL=https://app.dev.baserock.ai/it/leService
 export SERVICE_UNDER_TEST_URL=http://localhost:8080
 export PROTOCOL=rest
-export SERVICE_NAME=ravi-7th-march-polymorphic
+export SERVICE_NAME=ravi-todos-polymorphic
 
 
 if [ -z "$SERVICE_NAME" ]; then

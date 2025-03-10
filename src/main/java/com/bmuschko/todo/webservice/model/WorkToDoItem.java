@@ -5,7 +5,7 @@ import jakarta.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("work")
-public class WorkToDoItem extends ToDoItem {
+public class WorkToDoItem extends BaseTodoItem {
     private String projectCode;
     private Priority priority;
 
